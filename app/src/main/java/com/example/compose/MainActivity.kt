@@ -11,16 +11,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.navigation.compose.rememberNavController
+import com.example.compose.ui.home.HomeScreen
+import com.example.compose.ui.nav.NavigationScreen
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        enableEdgeToEdge()
 
+//        val navControllerv = rememberNavController()
+
         setContent {
             MaterialTheme{
                 Surface {
-                    Greeting("Compose")
+                    NavigationScreen()
                 }
             }
         }
@@ -29,10 +34,3 @@ class MainActivity : AppCompatActivity() {
 }
 
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
