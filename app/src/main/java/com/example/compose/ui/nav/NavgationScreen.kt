@@ -18,7 +18,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -26,8 +25,8 @@ import androidx.navigation.compose.rememberNavController
 import com.example.compose.ui.home.HomeScreen
 import com.example.compose.ui.pages.Page1
 
-val HOME_TITLE = "Home"
-val PAGE1_TITLE = "Page1"
+const val HOME_TITLE = "Home"
+const val PAGE1_TITLE = "Page1"
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -64,7 +63,7 @@ fun NavigationScreen(){
                         }
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color(0xFFB5B2FF))
+                colors = TopAppBarDefaults.mediumTopAppBarColors()
                 )
         },
         content = { padding ->
