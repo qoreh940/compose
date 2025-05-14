@@ -18,32 +18,39 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.compose.R
 import com.example.compose.ui.home.HomeScreen
 import com.example.compose.ui.pages.Page1
 
 const val HOME_TITLE = "Home"
-const val PAGE1_TITLE = "Page1"
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NavigationScreen(){
 
     val navController = rememberNavController()
-    var topTitle by remember { mutableStateOf(HOME_TITLE) }
     var showBackKey by remember { mutableStateOf(false) }
+
+    val naviRoutes = getRoutes()
+    val homeScreen = NaviScreenRoute("home", stringResource(R.string.home)){ _, nc -> HomeScreen(nc, naviRoutes) }
+    var topTitle by remember { mutableStateOf(homeScreen.title) }
+
 
     LaunchedEffect(navController) {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             showBackKey = navController.previousBackStackEntry != null
-            topTitle = when(destination.route){
-                "home" -> HOME_TITLE
-                "page1" -> PAGE1_TITLE
-                else -> "Invalid Page"
-            }
+            topTitle =
+                if(destination.route == homeScreen.route){
+                    homeScreen.title
+                } else {
+                    naviRoutes.firstOrNull { it.route == destination.route }?.title
+                        ?: "Invalid Page"
+                }
         }
 
     }
@@ -68,17 +75,19 @@ fun NavigationScreen(){
         },
         content = { padding ->
             NavHost(navController = navController, startDestination = "home", modifier = Modifier.padding(padding)){
+
                 composable("home") {
-                    HomeScreen(navController = navController)
+                    HomeScreen(navController, naviRoutes)
                 }
 
-                composable("page1") {
-                    Page1(navController = navController)
+                naviRoutes.forEach { screen ->
+                    composable(screen.route) { backStackEntry ->
+                        screen.content(backStackEntry, navController)
+                    }
                 }
             }
         }
     )
 
-
-
 }
+

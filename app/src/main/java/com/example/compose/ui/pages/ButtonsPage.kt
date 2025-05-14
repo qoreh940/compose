@@ -10,12 +10,12 @@ import androidx.navigation.NavController
 import com.example.compose.ui.component.TextButton
 
 @Composable
-fun Page1(navController: NavController){
+fun ButtonsPage(navController: NavController){
 
     Column(
         modifier = Modifier.fillMaxSize().padding(10.dp)
     ) {
-        TextButton("TEST PAGE", onClick = { /*navController.popBackStack()*/ })
+        TextButton("Basic Button", onClick = { /* navController.popBackStack() */})
     }
 
 }
