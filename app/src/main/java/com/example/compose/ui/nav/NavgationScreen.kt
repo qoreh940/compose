@@ -25,9 +25,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.compose.R
 import com.example.compose.ui.home.HomeScreen
-import com.example.compose.ui.pages.Page1
-
-const val HOME_TITLE = "Home"
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

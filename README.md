@@ -4,8 +4,7 @@ I just want to make a template for me. This is what I made this project.
 
 # The composable functions that I made (Adding...)
 - Buttons(TextButton)
-- NaviScreenRoute: Defined routes in Navigation using the NaviScreenRoute data class
-
+- NaviScreenRoute: 
 
 # The composable features provided by Android I used
 - Navigation (NavHost, NavController)

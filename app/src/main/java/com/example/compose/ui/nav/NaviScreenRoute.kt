@@ -8,6 +8,7 @@ import com.example.compose.R
 import com.example.compose.ui.pages.ButtonsPage
 import com.example.compose.ui.pages.Page1
 
+//Defined routes in Navigation using the NaviScreenRoute data class
 data class NaviScreenRoute(
     val route : String,
     val title : String,
