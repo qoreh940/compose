@@ -6,7 +6,7 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import com.example.compose.R
 import com.example.compose.ui.pages.ButtonsPage
-import com.example.compose.ui.pages.Page1
+import com.example.compose.ui.pages.DialogsPage
 
 //Defined routes in Navigation using the NaviScreenRoute data class
 data class NaviScreenRoute(
@@ -22,8 +22,8 @@ fun getRoutes() : List<NaviScreenRoute> {
         NaviScreenRoute("buttons", stringResource(R.string.buttons)){ _, nc ->
             ButtonsPage(nc)
         },
-        NaviScreenRoute("page1", "Page1"){ _, nc ->
-            Page1(nc)
+        NaviScreenRoute("dialogs", stringResource(R.string.dialogs)){ _, nc ->
+            DialogsPage(nc)
         }
     )
 

@@ -3,4 +3,8 @@
 
     <string name="home">Home</string>
     <string name="buttons">Buttons</string>
+    <string name="dialogs">Dialogs and Popovers</string>
+
+    <string name="confirm">Confirm</string>
+    <string name="dismiss">Dismiss</string>
 </resources>
