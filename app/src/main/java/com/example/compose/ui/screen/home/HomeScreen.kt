@@ -1,4 +1,4 @@
-package com.example.compose.ui.home
+package com.example.compose.ui.screen.home
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
@@ -16,7 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.compose.ui.nav.NaviScreenRoute
+import com.example.compose.core.navigation.NaviScreenRoute
 
 @Composable
 fun HomeScreen(navController: NavController, screenRoutes : List<NaviScreenRoute>){

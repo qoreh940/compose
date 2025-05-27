@@ -1,4 +1,4 @@
-package com.example.compose.ui.nav
+package com.example.compose.core.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
