@@ -14,21 +14,24 @@ import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.compose.core.navigation.NaviScreenRoute
+import com.example.compose.core.navigation.NavRoute
 
 @Composable
-fun HomeScreen(navController: NavController, screenRoutes : List<NaviScreenRoute>){
+fun HomeScreen(navController: NavController, screenRoutes: List<NavRoute>) {
 
 
     Column(
-        modifier = Modifier.fillMaxSize().padding(10.dp)
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(10.dp)
     ) {
 //        TextButton("Move to page 1", onClick = { navController.navigate("buttons") })
         LazyColumn(modifier = Modifier.fillMaxWidth()) {
-            items(screenRoutes){ screen ->
-                CardItem(screen.title) { navController.navigate(screen.route) }
+            items(screenRoutes) { screen ->
+                CardItem(stringResource(screen.titleRes)) { navController.navigate(screen.route) }
                 Spacer(Modifier.padding(vertical = 10.dp))
             }
         }
@@ -37,9 +40,11 @@ fun HomeScreen(navController: NavController, screenRoutes : List<NaviScreenRoute
 
 
 @Composable
-fun CardItem(text: String, clickListener : () -> Unit){
-    OutlinedCard (
-        modifier = Modifier.fillMaxWidth().padding(horizontal = 10.dp),
+fun CardItem(text: String, clickListener: () -> Unit) {
+    OutlinedCard(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 10.dp),
         onClick = clickListener,
         border = BorderStroke(2.dp, CardDefaults.cardColors().containerColor)
     ) {
@@ -47,6 +52,6 @@ fun CardItem(text: String, clickListener : () -> Unit){
             text = text,
             modifier = Modifier.padding(horizontal = 15.dp, vertical = 15.dp),
             style = MaterialTheme.typography.titleMedium
-            )
+        )
     }
 }
