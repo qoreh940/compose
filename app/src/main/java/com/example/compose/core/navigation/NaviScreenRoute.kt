@@ -5,8 +5,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import com.example.compose.R
-import com.example.compose.ui.pages.ButtonsPage
-import com.example.compose.ui.pages.DialogsPage
+import com.example.compose.ui.screen.buttons.ButtonsPage
+import com.example.compose.ui.screen.dialogs.DialogsPage
 
 //Defined routes in Navigation using the NaviScreenRoute data class
 data class NaviScreenRoute(
