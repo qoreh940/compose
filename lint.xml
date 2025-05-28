@@ -23,4 +23,8 @@
     <!-- 🧼 코드 일관성 -->
     <issue id="SuspiciousImport" severity="error" />
     <issue id="ConstantLocale" severity="error" />
+
+    <issue id="UnusedResources">
+        <option name="skip-libraries" value="true" />
+    </issue>
 </lint>
