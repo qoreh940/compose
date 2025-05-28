@@ -38,6 +38,12 @@ android {
     buildFeatures {
         compose = true
     }
+
+    lint {
+        lintConfig = file("lint.xml")
+        abortOnError = true // CI에서 실패로 처리
+        warningsAsErrors = false // 경고도 실패로 처리할지 여부
+    }
 }
 
 

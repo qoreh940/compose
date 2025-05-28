@@ -1,0 +1,26 @@
+<lint>
+    <!-- ❗ 국제화/다국어 대응 -->
+    <issue id="HardcodedText" severity="error" />
+
+    <!-- ❗ 접근성 대응 -->
+    <issue id="MissingContentDescription" severity="error" />
+
+    <!-- ❗ Android API 호환성 -->
+    <issue id="NewApi" severity="error" />
+    <issue id="InlinedApi" severity="error" />
+
+    <!-- ❗ 보안 및 Export 문제 -->
+    <issue id="ExportedReceiver" severity="error" />
+    <issue id="MissingPermission" severity="error" />
+
+    <!-- ⚡ 성능/최적화 관련 -->
+    <issue id="ObsoleteLayoutParam" severity="ignore" /> <!-- Compose에는 해당 없음 -->
+    <issue id="NestedWeights" severity="ignore" />        <!-- ViewGroup 기반 성능 이슈 생략 -->
+
+    <!-- ✨ 불필요한 리소스 제거 -->
+    <issue id="UnusedResources" severity="error" />
+
+    <!-- 🧼 코드 일관성 -->
+    <issue id="SuspiciousImport" severity="error" />
+    <issue id="ConstantLocale" severity="error" />
+</lint>
