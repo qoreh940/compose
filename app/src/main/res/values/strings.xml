@@ -3,7 +3,8 @@
 
     <string name="home">Home</string>
     <string name="buttons">Buttons</string>
-    <string name="dialogs">Dialogs and Popovers</string>
+    <string name="dialogs_title">Dialogs and Popovers</string>
+    <string name="pip_title">Custom PIP</string>
 
     <string name="confirm">Confirm</string>
     <string name="dismiss">Dismiss</string>

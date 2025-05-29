@@ -36,8 +36,6 @@ fun NavigationScreen() {
     var showBackKey by remember { mutableStateOf(false) }
 
     val naviRoutes = getRoutes()
-    val homeScreen = NavRoute("home", R.string.home, null) { _, nc -> HomeScreen(nc, naviRoutes) }
-
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = currentBackStackEntry?.destination?.route
     val childRoutes = getRoutes()

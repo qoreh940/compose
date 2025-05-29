@@ -8,6 +8,7 @@ import androidx.navigation.NavController
 import com.example.compose.R
 import com.example.compose.ui.screen.buttons.ButtonsPage
 import com.example.compose.ui.screen.dialogs.DialogsPage
+import com.example.compose.ui.screen.pip.PIPScreen
 
 //Defined routes in Navigation using the NaviScreenRoute data class
 @SuppressLint("SupportAnnotationUsage")
@@ -30,10 +31,17 @@ fun getRoutes(): List<NavRoute> {
         },
         NavRoute(
             route = "dialogs",
-            titleRes = R.string.dialogs,
+            titleRes = R.string.dialogs_title,
             deepLinkUri = null
         ) { _, nc ->
             DialogsPage(nc)
+        },
+        NavRoute(
+            route = "pip",
+            titleRes = R.string.pip_title,
+            deepLinkUri = null
+        ) { _, nc ->
+            PIPScreen(nc)
         }
     )
 

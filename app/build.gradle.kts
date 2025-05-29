@@ -49,6 +49,9 @@ android {
 
 dependencies {
 
+    // coil
+    implementation(libs.coil.compose)
+
     implementation(libs.androidx.ui.text.google.fonts)
     val nav_version = "2.9.0"
     implementation("androidx.navigation:navigation-compose:$nav_version")
