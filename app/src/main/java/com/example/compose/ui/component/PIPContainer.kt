@@ -2,15 +2,14 @@ package com.example.compose.ui.component
 
 import android.annotation.SuppressLint
 import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.VectorConverter
-import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
@@ -25,7 +24,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
-import com.example.compose.ui.component.modifier.PIPGestureInput
+import com.example.compose.ui.component.modifier.pipGestureInput
 import com.example.compose.ui.screen.pip.PIPDraggingInfo
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
@@ -33,20 +32,20 @@ import kotlin.math.roundToInt
 @SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
 fun PIPContainer(
-    maxWidth : Dp, // content의 maxWidth, 보통 Screen Width
+    maxWidth: Dp, // content의 maxWidth, 보통 Screen Width
     content: @Composable () -> Unit
-){
+) {
     val scope = rememberCoroutineScope()
     val offset = remember { Animatable(Offset(0f, 0f), Offset.VectorConverter) }
     var contentWidth by remember { mutableStateOf(maxWidth) }
 
-    fun startDrag(){
+    fun startDrag() {
         scope.launch {
             offset.stop()
         }
     }
 
-    fun drag(newOffset: Offset){
+    fun drag(newOffset: Offset) {
         scope.launch {
             offset.snapTo(newOffset)
         }
@@ -56,10 +55,14 @@ fun PIPContainer(
         scope.launch {
             offset.animateTo(
                 targetValue = newOffset,
-                animationSpec = spring(
-                    dampingRatio = Spring.DampingRatioLowBouncy,
-                    stiffness = Spring.StiffnessLow
+                animationSpec = tween(
+                    durationMillis = 300,
+                    easing = FastOutLinearInEasing
                 )
+//                    spring(
+//                    dampingRatio = Spring.DampingRatioMediumBouncy,
+//                    stiffness = Spring.StiffnessMedium,
+//                )
             )
         }
     }
@@ -76,13 +79,13 @@ fun PIPContainer(
         )
         Box(
             modifier = Modifier
-                .offset{
+                .offset {
                     IntOffset(
                         x = offset.value.x.roundToInt(),
                         y = offset.value.y.roundToInt()
                     )
                 }
-                .PIPGestureInput(
+                .pipGestureInput(
                     info = info,
                     startDrag = ::startDrag,
                     drag = ::drag,
@@ -94,7 +97,7 @@ fun PIPContainer(
                 .width(contentWidth)
                 .aspectRatio(16f / 9f)
                 .background(MaterialTheme.colorScheme.surfaceContainer)
-        ){
+        ) {
             content()
         }
     }
