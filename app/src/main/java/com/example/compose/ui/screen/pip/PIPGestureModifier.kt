@@ -1,4 +1,4 @@
-package com.example.compose.ui.component.modifier
+package com.example.compose.ui.screen.pip
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.gestures.awaitEachGesture
@@ -21,7 +21,6 @@ import androidx.compose.ui.input.pointer.changedToUp
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.input.pointer.positionChange
 import androidx.compose.ui.input.pointer.util.VelocityTracker
-import com.example.compose.ui.screen.pip.PIPDraggingInfo
 import kotlinx.coroutines.launch
 import kotlin.math.abs
 

@@ -1,4 +1,4 @@
-package com.example.compose.ui.component
+package com.example.compose.ui.screen.pip
 
 import android.annotation.SuppressLint
 import androidx.compose.animation.core.Animatable
@@ -24,8 +24,6 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
-import com.example.compose.ui.component.modifier.pipGestureInput
-import com.example.compose.ui.screen.pip.PIPDraggingInfo
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
