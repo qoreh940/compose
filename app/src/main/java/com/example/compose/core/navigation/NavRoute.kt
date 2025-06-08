@@ -8,6 +8,7 @@ import androidx.navigation.NavController
 import com.example.compose.R
 import com.example.compose.ui.screen.buttons.ButtonsPage
 import com.example.compose.ui.screen.dialogs.DialogsPage
+import com.example.compose.ui.screen.numeric.NumericKeypadPage
 import com.example.compose.ui.screen.pip.PIPScreen
 
 //Defined routes in Navigation using the NaviScreenRoute data class
@@ -42,6 +43,13 @@ fun getRoutes(): List<NavRoute> {
             deepLinkUri = null
         ) { _, nc ->
             PIPScreen(nc)
+        },
+        NavRoute(
+            route = "numeric",
+            titleRes = R.string.numeric_keypad,
+            deepLinkUri = null
+        ) { _, nc ->
+            NumericKeypadPage(nc)
         }
     )
 

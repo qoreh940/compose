@@ -67,6 +67,7 @@ fun PIPContainer(
         }
     }
 
+    // TODO : hide buttons
     BoxWithConstraints(Modifier.fillMaxSize()) {
         val movableMaxWidth = with(LocalDensity.current) { this@BoxWithConstraints.maxWidth.toPx() }
         val movableMaxHeight = with(LocalDensity.current) { maxHeight.toPx() }
