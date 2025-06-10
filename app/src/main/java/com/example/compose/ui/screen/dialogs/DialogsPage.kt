@@ -25,7 +25,6 @@ import com.example.compose.ui.component.SimpleDialog
 
 @Composable
 fun DialogsPage(navController: NavController) {
-
     var showBasicAlertDialog by remember { mutableStateOf(false) }
     var showSimpleDialog by remember { mutableStateOf(false) }
     var showPopupExample by remember { mutableStateOf(false) }

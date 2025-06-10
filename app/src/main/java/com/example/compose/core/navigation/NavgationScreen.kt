@@ -51,7 +51,6 @@ fun NavigationScreen() {
         }
 
     }
-
     Scaffold(
         topBar = {
             TopAppBar(

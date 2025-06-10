@@ -21,8 +21,6 @@ import com.example.compose.core.navigation.NavRoute
 
 @Composable
 fun HomeScreen(navController: NavController, screenRoutes: List<NavRoute>) {
-
-
     Column(
         modifier = Modifier
             .fillMaxSize()
