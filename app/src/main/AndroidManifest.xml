@@ -23,7 +23,7 @@
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:scheme="alice-compose" android:host="buttons" android:pathPrefix="/"/>
+                <data android:scheme="chch-compose" android:host="buttons" android:pathPrefix="/"/>
             </intent-filter>
         </activity>
     </application>

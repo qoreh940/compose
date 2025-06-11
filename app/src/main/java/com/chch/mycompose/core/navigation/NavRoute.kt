@@ -26,7 +26,7 @@ fun getRoutes(): List<NavRoute> {
         NavRoute(
             route = "buttons",
             titleRes = R.string.buttons,
-            deepLinkUri = "alice-compose://buttons/"
+            deepLinkUri = "chch-compose://buttons/"
         ) { _, nc ->
             ButtonsPage(nc)
         },
