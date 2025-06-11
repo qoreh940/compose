@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.compose"
+    namespace = "com.chch.mycompose"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.compose"
+        applicationId = "com.chch.mycompose"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
