@@ -8,6 +8,7 @@ import androidx.navigation.NavController
 import com.chch.mycompose.R
 import com.chch.mycompose.ui.screen.buttons.ButtonsPage
 import com.chch.mycompose.ui.screen.dialogs.DialogsPage
+import com.chch.mycompose.ui.screen.imageslider.ImageSliderScreen
 import com.chch.mycompose.ui.screen.numeric.NumericKeypadPage
 import com.chch.mycompose.ui.screen.pip.PIPScreen
 
@@ -50,7 +51,15 @@ fun getRoutes(): List<NavRoute> {
             deepLinkUri = null
         ) { _, nc ->
             NumericKeypadPage(nc)
+        },
+        NavRoute(
+            route = "imageSlider",
+            titleRes = R.string.image_slider,
+            deepLinkUri = null
+        ) { _, nc ->
+            ImageSliderScreen(nc)
         }
+
     )
 
     return secondScreenList
