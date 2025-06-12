@@ -32,6 +32,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.wear.compose.material3.ButtonGroup
 
 @Composable
 fun ButtonsPage(navController: NavController){
@@ -106,6 +107,8 @@ fun ButtonsPage(navController: NavController){
             iconDescription = "diamond",
             onClick = { }
         )
+
+        Spacer(Modifier.padding(vertical = 10.dp))
     }
 
 }

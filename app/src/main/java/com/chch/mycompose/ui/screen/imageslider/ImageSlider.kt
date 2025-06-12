@@ -34,11 +34,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
-data class DrawableItem(
-    @DrawableRes val resId: Int,
-    val label: String = ""
-)
-
 @Composable
 fun ImageSlider(
     items: List<DrawableItem>,
