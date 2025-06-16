@@ -7,6 +7,7 @@
     <string name="pip_title">Custom PIP</string>
     <string name="numeric_keypad">Numeric Keypad</string>
     <string name="image_slider">Image Slider</string>
+    <string name="modalbottomsheet">ModalBottomSheet</string>
 
     <string name="confirm">Confirm</string>
     <string name="dismiss">Dismiss</string>

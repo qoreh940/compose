@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import com.chch.mycompose.R
+import com.chch.mycompose.ui.screen.bottomsheet.BottomSheetScreen
 import com.chch.mycompose.ui.screen.buttons.ButtonsPage
 import com.chch.mycompose.ui.screen.dialogs.DialogsPage
 import com.chch.mycompose.ui.screen.imageslider.ImageSliderScreen
@@ -58,6 +59,13 @@ fun getRoutes(): List<NavRoute> {
             deepLinkUri = null
         ) { _, nc ->
             ImageSliderScreen(nc)
+        },
+        NavRoute(
+            route = "bottomSheet",
+            titleRes = R.string.modalbottomsheet,
+            deepLinkUri = null
+        ) { _, nc ->
+            BottomSheetScreen(nc)
         }
 
     )
