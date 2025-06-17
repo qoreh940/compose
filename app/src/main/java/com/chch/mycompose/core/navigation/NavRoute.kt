@@ -9,6 +9,7 @@ import com.chch.mycompose.R
 import com.chch.mycompose.ui.screen.bottomsheet.BottomSheetScaffoldScreen
 import com.chch.mycompose.ui.screen.bottomsheet.BottomSheetScreen
 import com.chch.mycompose.ui.screen.buttons.ButtonsPage
+import com.chch.mycompose.ui.screen.checklist.ChecklistScreen
 import com.chch.mycompose.ui.screen.dialogs.DialogsPage
 import com.chch.mycompose.ui.screen.imageslider.ImageSliderScreen
 import com.chch.mycompose.ui.screen.numeric.NumericKeypadPage
@@ -74,6 +75,13 @@ fun getRoutes(): List<NavRoute> {
             deepLinkUri = null
         ) { _, nc ->
             BottomSheetScaffoldScreen(nc)
+        },
+        NavRoute(
+            route = "checklist",
+            titleRes = R.string.checklist,
+            deepLinkUri = null
+        ) { _, nc ->
+            ChecklistScreen(nc)
         }
 
     )

@@ -9,6 +9,7 @@
     <string name="image_slider">Image Slider</string>
     <string name="modalbottomsheet">ModalBottomSheet</string>
     <string name="bottomsheetscaffold">BottomSheetScaffold</string>
+    <string name="checklist">Checklist</string>
 
     <string name="confirm">Confirm</string>
     <string name="dismiss">Dismiss</string>
