@@ -57,12 +57,13 @@ dependencies {
 
     implementation(libs.androidx.ui.text.google.fonts)
     implementation(libs.androidx.navigation.compose)
-    implementation(libs.androidx.compose.material3)
 
     val composeBom = platform("androidx.compose:compose-bom:2025.05.00")
     implementation(composeBom)
     androidTestImplementation(composeBom)
 
+    // Compose Material2 (Compose Material)
+    implementation(libs.androidx.material)
 
     // Material Design 3
     implementation(libs.material3)

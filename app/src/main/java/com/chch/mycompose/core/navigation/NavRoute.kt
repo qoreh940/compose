@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import com.chch.mycompose.R
+import com.chch.mycompose.ui.screen.bottomsheet.BottomSheetScaffoldScreen
 import com.chch.mycompose.ui.screen.bottomsheet.BottomSheetScreen
 import com.chch.mycompose.ui.screen.buttons.ButtonsPage
 import com.chch.mycompose.ui.screen.dialogs.DialogsPage
@@ -66,6 +67,13 @@ fun getRoutes(): List<NavRoute> {
             deepLinkUri = null
         ) { _, nc ->
             BottomSheetScreen(nc)
+        },
+        NavRoute(
+            route = "bottomSheetScaffold",
+            titleRes = R.string.bottomsheetscaffold,
+            deepLinkUri = null
+        ) { _, nc ->
+            BottomSheetScaffoldScreen(nc)
         }
 
     )
