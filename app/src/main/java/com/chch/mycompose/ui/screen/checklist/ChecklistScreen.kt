@@ -19,14 +19,20 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Divider
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Done
+import androidx.compose.material.icons.filled.ModeEdit
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TextField
@@ -38,6 +44,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
@@ -49,13 +56,45 @@ Scaffold 안에 Scaffold는 권장하지 않는 방식
 fun ChecklistScreen(
     nc: NavController
 ) {
-    var editMode by remember { mutableStateOf(false) }
+    var showInput by remember { mutableStateOf(false) }
     var editText by remember { mutableStateOf("") }
-    var checklist = remember { mutableStateListOf<CheckItem>() }
+    var editItem by remember { mutableStateOf<CheckItem?>(null) }
+    var editMode by remember { mutableStateOf(EditMode.VIEW) }
+    var checklist = remember {
+        mutableStateListOf<CheckItem>().apply {
+            add(CheckItem("산책하기"))
+            add(CheckItem("청소기 돌리기"))
+        }
+    }
 
-    // Sample list
-    checklist.add(CheckItem("산책하기"))
-    checklist.add(CheckItem("청소기 돌리기"))
+    fun resetInputState() {
+        showInput = false
+        editText = ""
+        editItem = null
+    }
+
+    fun handleChecklistInput() {
+        if (editText.isNotBlank()) {
+            when (editMode) {
+                EditMode.ADD -> {
+                    checklist.add(0, CheckItem(editText))
+                }
+
+                EditMode.EDIT -> {
+                    editItem?.let {
+                        val index = checklist.indexOf(it)
+                        checklist[index] = it.copy(content = editText)
+                    }
+                }
+
+                else -> { /* Do Nothing */
+                }
+            }
+
+        }
+        resetInputState()
+        editMode = EditMode.VIEW
+    }
 
     Scaffold(
         contentWindowInsets = WindowInsets(0),
@@ -65,13 +104,63 @@ fun ChecklistScreen(
                 contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
                 windowInsets = WindowInsets(0),
             ) {
+                IconButton(
+                    onClick = {
+                        resetInputState()
+                        editMode = if (editMode == EditMode.EDIT) EditMode.VIEW else EditMode.EDIT
+                    },
+                    colors = IconButtonDefaults.iconButtonColors(
+                        containerColor = if (editMode == EditMode.EDIT)
+                            MaterialTheme.colorScheme.primary
+                        else
+                            MaterialTheme.colorScheme.surfaceVariant
+                    ),
+                    modifier = Modifier.padding(end = 10.dp)
+                ) {
+                    Icon(
+                        Icons.Default.ModeEdit,
+                        contentDescription = "Edit Mode",
+                        tint = MaterialTheme.colorScheme.onPrimary
+                    )
+                }
+
+                IconButton(
+                    onClick = {
+                        resetInputState()
+                        editMode =
+                            if (editMode == EditMode.DELETE) EditMode.VIEW else EditMode.DELETE
+                    },
+                    colors = IconButtonDefaults.iconButtonColors(
+                        containerColor = if (editMode == EditMode.DELETE)
+                            MaterialTheme.colorScheme.primary
+                        else
+                            MaterialTheme.colorScheme.surfaceVariant
+                    ),
+                    modifier = Modifier.padding(end = 10.dp)
+                ) {
+                    Icon(
+                        Icons.Default.Delete,
+                        contentDescription = "Delete Mode",
+                        tint = MaterialTheme.colorScheme.onPrimary
+                    )
+                }
+
                 Spacer(Modifier.weight(1f))
                 FloatingActionButton(
-                    onClick = { editMode = true },
+                    onClick = {
+                        if (showInput)
+                            resetInputState()
+                        else
+                            showInput = true
+                        editMode = if (editMode == EditMode.ADD) EditMode.VIEW else EditMode.ADD
+                    },
                     modifier = Modifier.size(56.dp),
                     shape = CircleShape
                 ) {
-                    Icon(Icons.Default.Add, contentDescription = "Add")
+                    Icon(
+                        if (editMode == EditMode.ADD) Icons.Default.Clear else Icons.Default.Add,
+                        contentDescription = "Add an item"
+                    )
                 }
             }
         }
@@ -87,17 +176,27 @@ fun ChecklistScreen(
                 itemsIndexed(checklist) { index, item ->
                     CheckableRow(
                         item = item,
-                    ) {
-                        checklist[index] = item.copy(checked = it)
-                    }
-                    Divider()
+                        mode = editMode,
+                        onCheckedChange = {
+                            checklist[index] = item.copy(checked = it)
+                        },
+                        onEdit = {
+                            editText = it.content
+                            editItem = it
+                            showInput = true
+                        },
+                        onDelete = {
+                            checklist.remove(it)
+                        }
+                    )
+                    HorizontalDivider()
                 }
             }
 
             // Add a CheckItem
             AnimatedVisibility(
                 modifier = Modifier.align(Alignment.BottomCenter),
-                visible = editMode,
+                visible = showInput,
                 enter = slideInVertically(initialOffsetY = { +it }) + fadeIn(),
                 exit = slideOutVertically(targetOffsetY = { +it }) + fadeOut()
             ) {
@@ -113,16 +212,14 @@ fun ChecklistScreen(
                         onValueChange = { editText = it },
                         modifier = Modifier
                             .weight(1f)
-                            .padding(horizontal = 10.dp, vertical = 4.dp)
+                            .padding(horizontal = 10.dp, vertical = 4.dp),
+                        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+                        keyboardActions = KeyboardActions(
+                            onDone = { handleChecklistInput() }
+                        )
                     )
                     IconButton(
-                        onClick = {
-                            editMode = false
-                            if (editText.isNotBlank()) {
-                                checklist.add(0, CheckItem(editText))
-                                editText = ""
-                            }
-                        },
+                        onClick = { handleChecklistInput() },
                         enabled = editText.isNotBlank(),
                         modifier = Modifier
                             .padding(end = 10.dp)
@@ -145,4 +242,6 @@ fun ChecklistScreen(
         }
 
     }
+
+
 }
