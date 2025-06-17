@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.ModeEdit
-import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -20,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import com.chch.mycompose.ui.component.AnimatedCheckbox
 
 enum class EditMode {
     VIEW,
@@ -47,16 +47,14 @@ fun CheckableRow(
             .clickable { onCheckedChange(!item.checked) },
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Checkbox(
+        AnimatedCheckbox(
             checked = item.checked,
             onCheckedChange = null // Row에서 제어할 때 null로 둠!
         )
         Spacer(Modifier.width(4.dp))
-        Text(
+        AnimatedCheckItemText(
             text = item.content,
-            color = if (item.checked) disableTextColor else textColor,
-            textDecoration = if (item.checked) TextDecoration.LineThrough else null,
-            modifier = Modifier.padding(start = 8.dp)
+            isCompleted = item.checked
         )
         Spacer(Modifier.weight(1f))
         when (mode) {

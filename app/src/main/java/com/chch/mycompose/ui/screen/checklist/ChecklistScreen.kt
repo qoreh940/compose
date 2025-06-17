@@ -32,9 +32,9 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -104,46 +104,26 @@ fun ChecklistScreen(
                 contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
                 windowInsets = WindowInsets(0),
             ) {
-                IconButton(
+                AnimatedModeButton(
+                    isActive = editMode == EditMode.EDIT,
+                    icon = Icons.Default.ModeEdit,
+                    contentDescription = "Edit Mode Button",
                     onClick = {
                         resetInputState()
                         editMode = if (editMode == EditMode.EDIT) EditMode.VIEW else EditMode.EDIT
-                    },
-                    colors = IconButtonDefaults.iconButtonColors(
-                        containerColor = if (editMode == EditMode.EDIT)
-                            MaterialTheme.colorScheme.primary
-                        else
-                            MaterialTheme.colorScheme.surfaceVariant
-                    ),
-                    modifier = Modifier.padding(end = 10.dp)
-                ) {
-                    Icon(
-                        Icons.Default.ModeEdit,
-                        contentDescription = "Edit Mode",
-                        tint = MaterialTheme.colorScheme.onPrimary
-                    )
-                }
+                    }
+                )
 
-                IconButton(
+                AnimatedModeButton(
+                    isActive = editMode == EditMode.DELETE,
+                    icon = Icons.Default.Delete,
+                    contentDescription = "Delete Mode Button",
                     onClick = {
                         resetInputState()
                         editMode =
                             if (editMode == EditMode.DELETE) EditMode.VIEW else EditMode.DELETE
-                    },
-                    colors = IconButtonDefaults.iconButtonColors(
-                        containerColor = if (editMode == EditMode.DELETE)
-                            MaterialTheme.colorScheme.primary
-                        else
-                            MaterialTheme.colorScheme.surfaceVariant
-                    ),
-                    modifier = Modifier.padding(end = 10.dp)
-                ) {
-                    Icon(
-                        Icons.Default.Delete,
-                        contentDescription = "Delete Mode",
-                        tint = MaterialTheme.colorScheme.onPrimary
-                    )
-                }
+                    }
+                )
 
                 Spacer(Modifier.weight(1f))
                 FloatingActionButton(
@@ -164,7 +144,6 @@ fun ChecklistScreen(
                 }
             }
         }
-
     ) { innerPadding ->
         Box(
             Modifier
@@ -174,6 +153,7 @@ fun ChecklistScreen(
 
             LazyColumn(Modifier.fillMaxWidth()) {
                 itemsIndexed(checklist) { index, item ->
+
                     CheckableRow(
                         item = item,
                         mode = editMode,
@@ -189,6 +169,7 @@ fun ChecklistScreen(
                             checklist.remove(it)
                         }
                     )
+
                     HorizontalDivider()
                 }
             }
@@ -209,6 +190,12 @@ fun ChecklistScreen(
                 ) {
                     TextField(
                         value = editText,
+                        placeholder = {
+                            Text(
+                                "Please enter a checklist item",
+                                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(0.6f)
+                            )
+                        },
                         onValueChange = { editText = it },
                         modifier = Modifier
                             .weight(1f)
@@ -242,6 +229,4 @@ fun ChecklistScreen(
         }
 
     }
-
-
 }
