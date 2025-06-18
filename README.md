@@ -19,7 +19,11 @@ This project was created as a learning sandbox to explore and understand core Je
 - **NumericKeypadPage**: UI with a custom number-only input keypad.
 - **PIPScreen**: A draggable, dockable floating container (Picture-in-Picture style).
 - **Navigation**: Basic Compose navigation using `NavRoute` and `NavigationScreen`.
-
+- **ChecklistScreen:** Demo for editable checklist with custom checkboxes and bottom bar.
+- **ImageSliderScreen:** Horizontally scrollable image slider with auto-sliding and indicators.
+- **BottomSheetScaffoldScreen:** Sample bottom sheet usage, both in Material2 and Material3 styles.
+- **AnimatedCheckBox and Animated UI Feedback:** Custom animations for buttons, checkboxes, and other user interactions.
+- 
 ## 🧩 Composables and Jetpack Compose Features Used
 This project explores a wide range of composables and UI constructs available in Jetpack Compose:
 
@@ -34,18 +38,47 @@ This project explores a wide range of composables and UI constructs available in
     - `AlertDialog` and `Dialog` for showing modal interfaces and confirmations.
 - **Popups**:
     - `Popup` and a custom `RowPopover` composable – designed to mimic iOS-style popovers using Compose's `Popup` API.
+- **Material3 Custom Theming:** The project uses Material3 custom colors, typography, and shapes via the `ui/theme` package.
+- **Image and Vector Assets:** Includes sample images and vector icons for use in UI demonstrations.
+
 
 ## 📁 Project Structure
 src/
-├── main/
-│   ├── java/com/example/compose/
-│   │   ├── ui/screen/         # Various sample pages
-│   │   ├── ui/component/      # Reusable UI components
-│   │   ├── ui/theme/          # Custom Material theme setup
-│   │   ├── core/navigation/   # Navigation logic
-│   ├── res/                   # Resources (icons, strings, colors)
-│   ├── AndroidManifest.xml
-
+└── main/
+├── java/
+│   └── com/
+│       └── chch/
+│           └── mycompose/
+│               ├── MainActivity.kt
+│               ├── navigation/
+│               │   └── ...            # Navigation-related classes
+│               ├── ui/
+│               │   ├── component/
+│               │   │   ├── AnimatedCheckBox.kt
+│               │   │   ├── Dialog.kt
+│               │   │   ├── Popover.kt
+│               │   │   └── ...        # Other custom components
+│               │   ├── screen/
+│               │   │   ├── ButtonsPage.kt
+│               │   │   ├── DialogsPage.kt
+│               │   │   ├── NumericKeypadPage.kt
+│               │   │   ├── PIPScreen.kt
+│               │   │   ├── ChecklistScreen.kt
+│               │   │   ├── ImageSliderScreen.kt
+│               │   │   ├── BottomSheetScaffoldScreen.kt
+│               │   │   └── ...        # Other screens/samples
+│               │   ├── theme/
+│               │   │   ├── Color.kt
+│               │   │   ├── Theme.kt
+│               │   │   └── Type.kt
+│               │   └── ...            # Other UI files
+│               └── ...                # Other app-level files
+├── res/
+│   ├── drawable/                      # Sample images & icons
+│   ├── mipmap/                        # Launcher icons
+│   ├── values/                        # colors.xml, themes.xml, strings.xml, etc.
+│   └── ...                            # Other resources (e.g. xml/)
+└── AndroidManifest.xml
 
 # 🛠️ Tech Stack
 
@@ -56,13 +89,17 @@ src/
 
 ## 🧪 Modules for Practice
 
-| Feature            | File/Folder                                      |
-|--------------------|--------------------------------------------------|
-| Buttons showcase   | `ButtonsPage.kt`                                 |
-| Dialog samples     | `DialogsPage.kt`, `Dialog.kt`                    |
-| Custom keypad      | `NumericKeypadPage.kt`, `NumericKeypad.kt`       |
-| PIP window UI      | `PIPContainer.kt`, `PIPGestureModifier.kt`       |
-| Navigation         | `NavRoute.kt`, `NavigationScreen.kt`             |
+| Feature                | File/Folder                                              |
+|------------------------|----------------------------------------------------------|
+| Buttons showcase       | `ButtonsPage.kt`                                         |
+| Dialog samples         | `DialogsPage.kt`, `Dialog.kt`                            |
+| Custom keypad          | `NumericKeypadPage.kt`, `NumericKeypad.kt`               |
+| PIP window UI          | `PIPContainer.kt`, `PIPGestureModifier.kt`               |
+| Navigation             | `NavRoute.kt`, `NavigationScreen.kt`                     |
+| Checklist with animation | `ChecklistScreen.kt`, `AnimatedCheckBox.kt`            |
+| Image slider           | `ImageSliderScreen.kt`                                   |
+| Bottom sheet samples   | `BottomSheetScaffoldScreen.kt`                           |
+| Popover (iOS style)    | `Popover.kt`                                             |
 
 ## 📦 How to Run
 1. Clone this project
