@@ -7,15 +7,17 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.chch.mycompose.util.ComposeLogger.logd
+import com.chch.mycompose.util.loge
+import com.chch.mycompose.util.logw
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
-class MyFirebaseMessagingService : FirebaseMessagingService() {
+class ComposeFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         val title = remoteMessage.notification?.title ?: "알림"
@@ -26,7 +28,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onNewToken(token: String) {
         super.onNewToken(token)
-        Log.d("FCM", "FCM token refreshed: $token")
+        logd("FCM token refreshed: $token")
          sendTokenToServer(token)
     }
 
@@ -70,12 +72,12 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         ) {
             NotificationManagerCompat.from(context).notify(notificationId, builder.build())
         } else {
-            Log.w("FCM", "No POST_NOTIFICATIONS permission, cannot show notification.")
+            logw("No POST_NOTIFICATIONS permission, cannot show notification.")
         }
     }
 
     private fun sendTokenToServer(token: String) {
-        // 로그인 유저 ID (익명이라면 기기 UUID 등 사용 가능)
+        // TODO: 로그인 기능 구현 필요
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: "anonymous"
 
         val db = FirebaseFirestore.getInstance()
@@ -86,12 +88,10 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             .document(userId)
             .set(data)
             .addOnSuccessListener {
-                // 저장 성공 시
-                Log.d("FCM", "Token successfully written to Firestore!")
+                logd("Token successfully written to Firestore!")
             }
             .addOnFailureListener { e ->
-                // 저장 실패 시
-                Log.w("FCM", "Error writing token", e)
+                loge("Error writing token", e)
             }
     }
 }
