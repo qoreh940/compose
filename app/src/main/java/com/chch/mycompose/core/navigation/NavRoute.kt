@@ -14,6 +14,7 @@ import com.chch.mycompose.ui.screen.dialogs.DialogsPage
 import com.chch.mycompose.ui.screen.imageslider.ImageSliderScreen
 import com.chch.mycompose.ui.screen.numeric.NumericKeypadPage
 import com.chch.mycompose.ui.screen.pip.PIPScreen
+import com.chch.mycompose.ui.screen.selection.RadioCheckboxPage
 
 //Defined routes in Navigation using the NaviScreenRoute data class
 @SuppressLint("SupportAnnotationUsage")
@@ -82,6 +83,13 @@ fun getRoutes(): List<NavRoute> {
             deepLinkUri = null
         ) { _, nc ->
             ChecklistScreen(nc)
+        },
+        NavRoute(
+            route = "radioAndCheckbox",
+            titleRes = R.string.radio_and_checkbox,
+            deepLinkUri = null
+        ) { _, nc ->
+            RadioCheckboxPage(nc)
         }
 
     )

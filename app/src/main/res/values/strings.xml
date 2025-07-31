@@ -10,6 +10,7 @@
     <string name="modalbottomsheet">ModalBottomSheet</string>
     <string name="bottomsheetscaffold">BottomSheetScaffold</string>
     <string name="checklist">Checklist</string>
+    <string name="radio_and_checkbox">Radio Button and Checkbox</string>
 
     <string name="confirm">Confirm</string>
     <string name="dismiss">Dismiss</string>
