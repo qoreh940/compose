@@ -7,9 +7,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -26,12 +29,29 @@ import com.chch.mycompose.ui.component.RadioWithText
 fun RadioCheckboxPage(
     nc: NavController,
 ) {
+    val scrollState = rememberScrollState()
+
     var selectedGender by remember { mutableStateOf(Gender.FEMALE) }
 
     val toppingList = getToppingList()
     var selectedToppings by remember { mutableStateOf(setOf<Topping>()) }
 
-    Column(Modifier.fillMaxSize()) {
+    val agreementOptions = getAgreementOptions()
+    var selectedAgreementOptions by remember { mutableStateOf(setOf<AgreementOption>()) }
+
+    val radioState by remember(selectedAgreementOptions) {
+        derivedStateOf {
+            when (selectedAgreementOptions.size) {
+                0 -> AgreementState.NONE
+                agreementOptions.size -> AgreementState.ALL
+                else -> AgreementState.INDETERMINATE
+            }
+        }
+    }
+
+    Column(Modifier
+        .fillMaxSize()
+        .verticalScroll(scrollState)) {
 
         // Radio buttons for Gender
         BorderedSection(
@@ -84,6 +104,59 @@ fun RadioCheckboxPage(
             }
         }
 
+        Spacer(Modifier.height(20.dp))
+
+        // Radio Button with Checkbox
+        BorderedSection(
+            title = "Agreement"
+        ) {
+
+            Column {
+                Row(
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(10.dp)
+                        .selectableGroup()
+                ) {
+
+                    AgreementState.entries.forEach { state ->
+                        RadioWithText(
+                            modifier = Modifier.weight(1f),
+                            selected = state == radioState,
+                            text = state.displayName,
+                        ) {
+                            when (state) {
+                                AgreementState.ALL -> selectedAgreementOptions =
+                                    agreementOptions.toSet()
+
+                                AgreementState.NONE -> selectedAgreementOptions = emptySet()
+                                AgreementState.INDETERMINATE -> {
+                                    // Do Nothing
+                                }
+                            }
+                        }
+                    }
+                }
+
+                Column {
+                    agreementOptions.forEach { opt ->
+                        CheckboxWithText(
+                            text = opt.name,
+                            checked = selectedAgreementOptions.contains(opt)
+                        ) { checked ->
+                            selectedAgreementOptions = if (checked) {
+                                selectedAgreementOptions + opt
+                            } else {
+                                selectedAgreementOptions - opt
+                            }
+                        }
+                    }
+                }
+
+            }
+
+
+        }
     }
 
 

@@ -1,5 +1,6 @@
 package com.chch.mycompose.ui.component
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
@@ -18,6 +19,7 @@ fun CheckboxWithText(
     onChecked: (Boolean) -> Unit,
 ) {
     Row(
+        modifier = Modifier.clickable(onClick = { onChecked.invoke(!checked) }),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Checkbox(
